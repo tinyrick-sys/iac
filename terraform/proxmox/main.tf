@@ -35,7 +35,7 @@ resource "proxmox_virtual_environment_file" "cloud_config" {
   }
 }
 
-resource "proxmox_virtual_environment_vm" "cicd" {
+resource "proxmox_virtual_environment_vm" "docker" {
     depends_on = [
         proxmox_virtual_environment_download_file.cloud_image,
         proxmox_virtual_environment_file.cloud_config
@@ -78,7 +78,7 @@ resource "proxmox_virtual_environment_vm" "cicd" {
         affinity = null
     }
 
-    description = "cicd"
+    description = "docker"
 
     disk {
         aio = "io_uring"
@@ -88,7 +88,7 @@ resource "proxmox_virtual_environment_vm" "cicd" {
         path_in_datastore = null
         discard = "on"
         file_format = "raw"
-        file_id = "local:iso/cloud_image_x86_64_jammy.img"
+        file_id = proxmox_virtual_environment_download_file.cloud_image.id
         interface = "scsi0"
         iothread = false
         replicate = true
@@ -139,14 +139,14 @@ resource "proxmox_virtual_environment_vm" "cicd" {
         keep_hugepages = null
     }
 
-    name = "cicd"
+    name = "docker"
 
     network_device {
         bridge = "vmbr0"
         disconnected = false
         enabled = true
         firewall = false
-        mac_address = "0a:00:00:00:11:01"
+        mac_address = "0a:00:00:00:11:02"
         model = "virtio"
         mtu = null
         queues = null
@@ -161,7 +161,7 @@ resource "proxmox_virtual_environment_vm" "cicd" {
         type = "l26"
     }
 
-    # pool_id = "cicd"
+    # pool_id = "docker"
 
     started = true
 
@@ -171,7 +171,7 @@ resource "proxmox_virtual_environment_vm" "cicd" {
         down_delay = 0
     }
 
-    tags = ["terraform", "cloud-image", "cicd"]
+    tags = ["terraform", "cloud-image", "docker"]
 
     stop_on_destroy = true
 
