@@ -17,15 +17,15 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 echo "Running Terraform plan..."
-                sh 'terraform plan'
+                // Save the plan to a file so that apply matches exactly the plan
+                sh 'terraform plan -out=tfplan'
             }
         }
         stage('Terraform Apply') {
             steps {
-                // Optional: require manual approval before applying changes
-                input message: 'Approve Terraform Apply?'
                 echo "Applying Terraform changes..."
-                sh 'terraform apply -auto-approve'
+                // Apply the plan that was generated in the previous stage
+                sh 'terraform apply tfplan'
             }
         }
     }
