@@ -4,27 +4,35 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Check out source code from your repository
                 checkout scm
             }
         }
         stage('Terraform Init') {
             steps {
-                echo "Initializing Terraform..."
+                echo 'Initializing Terraform...'
                 sh 'terraform init'
             }
         }
         stage('Terraform Plan') {
             steps {
-                echo "Running Terraform plan..."
-                // Save the plan to a file so that apply matches exactly the plan
-                sh 'terraform plan -out=tfplan'
+                withCredentials([
+                    file(credentialsId: 'tfvars', variable: 'TFVARS_FILE'),
+                    file(credentialsId: 'ssh_private_key', variable: 'SSH_PRIVATE_KEY')
+                ]) {
+                    echo "Setting private key permissions"
+                    sh "chmod 600 ${SSH_PRIVATE_KEY}"
+                    
+                    echo "Copying private key to workspace"
+                    sh "cp ${SSH_PRIVATE_KEY} ./id_rsa"
+                    
+                    echo 'Running Terraform plan...'
+                    sh "terraform plan -var-file=${TFVARS_FILE} -var 'SSH_PRIVATE_KEY=./id_rsa' -out=tfplan"
+                }
             }
         }
         stage('Terraform Apply') {
             steps {
-                echo "Applying Terraform changes..."
-                // Apply the plan that was generated in the previous stage
+                echo 'Applying Terraform changes...'
                 sh 'terraform apply tfplan'
             }
         }
