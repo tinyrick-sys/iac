@@ -7,7 +7,7 @@ resource "proxmox_virtual_environment_download_file" "cloud_image_jammy_0_1_12" 
 resource "proxmox_virtual_environment_file" "cloud_config" {
   content_type = "snippets"
   datastore_id = "local"
-  node_name    = "pve"
+  node_name    = "proxmox"
 
   source_raw {
     data = <<-EOF
