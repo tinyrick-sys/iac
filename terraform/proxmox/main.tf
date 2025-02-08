@@ -43,7 +43,7 @@ resource "proxmox_virtual_environment_vm" "cicd" {
     
     # REQUIRED
     ################################################
-    node_name = "pve"
+    node_name = "proxmox"
 
     # OPTIONAL
     ################################################
