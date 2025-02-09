@@ -23,7 +23,7 @@ resource "proxmox_virtual_environment_file" "cloud_config" {
         shell: /bin/bash
         sudo: ALL=(ALL) NOPASSWD:ALL
     mounts:
-      - ["${var.NAS_LOCAL_IP}:${var.NAS_NFS_MEDIA}", "${var.NAS_NFS_MEDIA}", "nfs", "defaults,nofail", "0", "2"]
+      - ["${var.NAS_TRUENAS_IP_ADDRESS}:${var.NAS_NFS_MEDIA}", "${var.NAS_NFS_MEDIA}", "nfs", "defaults,nofail", "0", "2"]
     runcmd:
       - su - ${var.VIRTUAL_MACHINE_USERNAME} -c "ssh-import-id gh:${var.GITHUB_USERNAME}"
       - mkdir -p ${var.NAS_NFS_MEDIA}

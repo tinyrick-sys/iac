@@ -37,7 +37,7 @@ variable "VIRTUAL_MACHINE_USERNAME" {
   default = null
 }
 
-variable "NAS_LOCAL_IP" {
+variable "NAS_TRUENAS_IP_ADDRESS" {
   type = string
   default = null
 }
