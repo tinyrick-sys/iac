@@ -10,3 +10,7 @@ scrape_configs:
   - job_name: "cadvisor"
     static_configs:
       - targets: ["${VIRTUAL_MACHINE_DOCKER_IP_ADDRESS}:8082"]
+
+  - job_name: "docker"
+    static_configs:
+      - targets: ["${VIRTUAL_MACHINE_DOCKER_IP_ADDRESS}:9100"]
