@@ -1,4 +1,4 @@
-/resource "null_resource" "exec_prometheus" {
+resource "null_resource" "exec_prometheus" {
   triggers = {
     always_run = timestamp()
   }
@@ -18,12 +18,12 @@
   }
 }
 
-/resource "docker_image" "prometheus" {
+resource "docker_image" "prometheus" {
   depends_on = [null_resource.exec_prometheus]
   name = "prom/prometheus:v3.1.0"
 }
 
-/resource "docker_container" "prometheus" {
+resource "docker_container" "prometheus" {
   depends_on = [docker_image.prometheus]
   name  = "prometheus"
   image = docker_image.prometheus.image_id
