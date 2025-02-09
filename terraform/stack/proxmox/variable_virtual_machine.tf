@@ -25,7 +25,7 @@ variable "VIRTUAL_MACHINE_GLOBAL_DATASTORE_ID_SNIPPET" {
 }
 
 ### TRUENAS ###
-variable "VIRTUAL_MACHINE_TRUEVIRTUAL_MACHINE_TRUENAS_NFS_MEDIA" {
+variable "VIRTUAL_MACHINE_TRUENAS_NFS_MEDIA" {
   type = string
   default = null
 }
@@ -42,7 +42,7 @@ variable "VIRTUAL_MACHINE_DOCKER_IP_ADDRESS" {
 }
 
 variable "VIRTUAL_MACHINE_DOCKER_MAC_ADDRESS" {
-  type = number
+  type = string
   default = null
 }
 
@@ -73,7 +73,7 @@ variable "VIRTUAL_MACHINE_DEVELOPMENT_IP_ADDRESS" {
 }
 
 variable "VIRTUAL_MACHINE_DEVELOPMENT_MAC_ADDRESS" {
-  type = number
+  type = string
   default = null
 }
 
