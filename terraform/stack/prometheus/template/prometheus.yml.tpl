@@ -13,4 +13,4 @@ scrape_configs:
 
   - job_name: "docker"
     static_configs:
-      - targets: ["${VIRTUAL_MACHINE_DOCKER_IP_ADDRESS}:9100"]
+      - targets: ["${VIRTUAL_MACHINE_DOCKER_IP_ADDRESS}:8081"]
