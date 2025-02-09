@@ -48,4 +48,3 @@ resource "docker_container" "prometheus" {
   #   retries = 12
   # }
 }
-#
