@@ -1,0 +1,20 @@
+{ 
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json", 
+  "extends": [ 
+    "config:recommended" 
+  ], 
+  "labels": ["renovate"], 
+  "branchPrefix": "renovate/", 
+  "automerge": true,
+  "enabledManagers": [
+    "dockerfile",
+    "terraform",
+    "ansible",
+    "jenkins",
+    "argocd",
+    "pip_requirements"
+  ],
+  "ignorePaths": [
+    "docs/**"
+  ]
+}
